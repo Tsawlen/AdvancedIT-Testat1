@@ -8,6 +8,7 @@ public class PrivateSharedSpace {
 	private boolean[] waiting;
 	private int lastDrivenThrough;
 	private Semaphore[] privateSemaphore;
+	private Semaphore mutex = new Semaphore(1, true);
 	
 	//Initialisiere PrivateSharedSpace
 	public PrivateSharedSpace() {
@@ -29,19 +30,27 @@ public class PrivateSharedSpace {
 	 */
 	
 	public void enterLok0() {
-		
+		try {
+			mutex.acquire();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		//Check if the shared space is free and if lok 1 has already passed through the shared space
 		if(!blocked && lastDrivenThrough == 1) {
 			//Allow passage of the shared space
 			privateSemaphore[0].release();
+			blocked = true;
 		}else {
 			//Wait for the system to allow access to the shared space
 			waiting[0] = true;
 		}
 		
+		mutex.release();
+		
 		try {
 			privateSemaphore[0].acquire();
 			waiting[0] = false;
+			
 			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -53,14 +62,22 @@ public class PrivateSharedSpace {
 	 * Return: void
 	 */
 	public void enterLok1() {
+		try {
+			mutex.acquire();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		//Check if the shared space is free and if lok 0 has already passed through the shared space
 		if(!blocked && lastDrivenThrough == 0) {
 			//Allow passage of the shared space
 			privateSemaphore[1].release();
+			blocked = true;
 		}else {
 			//Wait for the system to allow access to the shared space
 			waiting[1] = true;
 		}
+		mutex.release();
 		
 		try {
 			privateSemaphore[1].acquire();
@@ -80,6 +97,16 @@ public class PrivateSharedSpace {
 		System.out.println("\t\t\tZug 0 verlässt gemeinsamen Bereich!");
 		//Set the status of the last driven Train to Lok 0
 		lastDrivenThrough = 0;
+		try {
+			mutex.acquire();
+			blocked = false;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			mutex.release();
+		}
 		//When Lok 1 is already waiting to access the shared space, let it drive through
 		if(waiting[1]) {
 			privateSemaphore[1].release();
@@ -95,6 +122,16 @@ public class PrivateSharedSpace {
 		System.out.println("\t\t\tZug 1 verlässt gemeinsamen Bereich!");
 		//Set the status of the last driven Train to Lok 1
 		lastDrivenThrough = 1;
+		try {
+			mutex.acquire();
+			blocked = false;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			mutex.release();
+		}
 		//When Lok 0 is already waiting to access the shared space, let it drive through
 		if(waiting[0]) {
 			privateSemaphore[0].release();
