@@ -6,7 +6,7 @@
 `TrainRunner.class`  
 
 ## Dateien für Aufgabe B
-`PrivateSharedSpace.java` 
-`PrivateTrainRunner.java`
-`PrivateSharedSpace.class`
-`PrivateTrainRunner.class`
+`PrivateSharedSpace.java`   
+`PrivateTrainRunner.java`  
+`PrivateSharedSpace.class`  
+`PrivateTrainRunner.class`  
