@@ -280,6 +280,7 @@ Zug 0 fährt auf seinem eigenen Bereich!
 						Zug 1 möchte in den gemeinsamen Bereich einfahren 
 ```	
 #### Auswertung des 2. Beispieles
+In diesem Beispiel ist zu sehen, dass die Bedingungen auch bei dieser Konfiguration eingehalten werden.
 ### Beispiel 3: Geschwindigkeit Lok 0 > Geschwindigkeit Lok 1
 In diesem Beispiel soll Lok 0 erneut schneller fahren als Lok 1. Hierfür wurden folgende Einstellungen gewählt:
 ```java
@@ -359,4 +360,7 @@ Zug 0 fährt auf seinem eigenen Bereich!
 Zug 0 möchte in den gemeinsamen Bereich einfahren
 ```
 #### Auswertung des 3. Beispieles
+Durch das Protokoll ist zu sehen, dass auch hier sämtliche Bedingungen eingehalten werden. Hier fährt Lok 0 zuerst durch den Bereich und danach immer abwechselnd. 
 ### Auswertung der Aufgabe B
+Mit den oben aufgeführten Beispielen sollte gezeigt sein, dass diese Lösung auch wirklich eine Lösung ist.  
+Das dies funktioniert ist auf das Array der Semaphore, Array der Wartezustände und die lastDrivenThrough variable zurückzuführen. Hierdurch kann vor dem Befahren des kritischen Abschnittes geprüft werden, ob der Zug schon dran ist durch den Abschnitt zu fahren und ob der Abschnitt überhaupt frei ist.

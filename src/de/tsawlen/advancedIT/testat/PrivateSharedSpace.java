@@ -96,9 +96,10 @@ public class PrivateSharedSpace {
 	public void exitLok0() {
 		System.out.println("\t\t\tZug 0 verlässt gemeinsamen Bereich!");
 		//Set the status of the last driven Train to Lok 0
-		lastDrivenThrough = 0;
+		
 		try {
 			mutex.acquire();
+			lastDrivenThrough = 0;
 			blocked = false;
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -121,9 +122,10 @@ public class PrivateSharedSpace {
 	public void exitLok1() {
 		System.out.println("\t\t\tZug 1 verlässt gemeinsamen Bereich!");
 		//Set the status of the last driven Train to Lok 1
-		lastDrivenThrough = 1;
+		
 		try {
 			mutex.acquire();
+			lastDrivenThrough = 1;
 			blocked = false;
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
