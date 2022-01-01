@@ -20,7 +20,7 @@ public class PrivateTrainRunner extends Thread {
 	}
 	
 	/***
-	 * This function is responsable for running the threads of the PrivateTrainRunner
+	 * This function is responsible for running the threads of the PrivateTrainRunner
 	 */
 	@Override
 	public void run() {

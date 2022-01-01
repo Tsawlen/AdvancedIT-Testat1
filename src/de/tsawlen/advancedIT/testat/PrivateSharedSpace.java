@@ -10,7 +10,7 @@ public class PrivateSharedSpace {
 	private Semaphore[] privateSemaphore;
 	private Semaphore mutex = new Semaphore(1, true);
 	
-	//Initialisiere PrivateSharedSpace
+	//Initialize PrivateSharedSpace
 	public PrivateSharedSpace() {
 		
 		blocked = false;
@@ -25,7 +25,7 @@ public class PrivateSharedSpace {
 	}
 	
 	/***
-	 * This function is responsable for letting Lok 0 enter the shared Space
+	 * This function is responsible for letting Lok 0 enter the shared Space
 	 * Return: void
 	 */
 	
@@ -58,7 +58,7 @@ public class PrivateSharedSpace {
 	}
 	
 	/***
-	 * This function is responsable for letting Lok 1 enter the shared Space
+	 * This function is responsible for letting Lok 1 enter the shared Space
 	 * Return: void
 	 */
 	public void enterLok1() {
@@ -115,7 +115,7 @@ public class PrivateSharedSpace {
 	}
 	
 	/***
-	 * This function is responsable for letting Lok 1 leave the shared Space
+	 * This function is responsible for letting train 1 leave the shared Space
 	 * Return: void
 	 */
 	public void exitLok1() {
